@@ -1,0 +1,9 @@
+{
+	"id" : "synologychat",
+	"name" : "Chat Synology",
+	"description" : "Plugin pour integrer Jeedom au chat Synology",
+	"licence" : "AGPL",
+	"author" : "Loïc",
+	"require" : "2.3",
+	"category" : "communication"
+}
