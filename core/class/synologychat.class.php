@@ -24,27 +24,6 @@ class synologychat extends eqLogic {
 
 	/*     * ***********************Methode static*************************** */
 
-	/*
-		     * Fonction exécutée automatiquement toutes les minutes par Jeedom
-		      public static function cron() {
-
-		      }
-	*/
-
-	/*
-		     * Fonction exécutée automatiquement toutes les heures par Jeedom
-		      public static function cronHourly() {
-
-		      }
-	*/
-
-	/*
-		     * Fonction exécutée automatiquement tous les jours par Jeedom
-		      public static function cronDayly() {
-
-		      }
-	*/
-
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preSave() {
@@ -118,6 +97,19 @@ class synologychatCmd extends cmd {
 			$decode_result = json_decode($result, true);
 			if (!isset($decode_result['success']) || !$decode_result['success']) {
 				throw new Exception(__('Erreur : ', __FILE__) . $result);
+			}
+
+			foreach ($_options['files'] as $file) {
+				$post = array('text' => 'Send file', 'file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
+				$request_http->setPost('payload=' . json_encode($post));
+				$result = $request_http->exec(5, 3);
+				if (!is_json($result)) {
+					throw new Exception(__('Erreur : ', __FILE__) . $result);
+				}
+				$decode_result = json_decode($result, true);
+				if (!isset($decode_result['success']) || !$decode_result['success']) {
+					throw new Exception(__('Erreur : ', __FILE__) . $result);
+				}
 			}
 		}
 	}

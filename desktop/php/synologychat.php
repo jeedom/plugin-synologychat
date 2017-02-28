@@ -95,6 +95,15 @@ foreach (object::all() as $object) {
          </div>
        </div>
        <div class="form-group">
+         <label class="col-sm-3 control-label">{{Accès}}</label>
+         <div class="col-sm-3">
+           <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="networkmode">
+             <option value="external">{{Externe}}</option>
+             <option value="internal">{{Interne}}</option>
+           </select>
+         </div>
+       </div>
+       <div class="form-group">
         <label class="col-sm-3 control-label">{{URL Webhooks entrant}}</label>
         <div class="col-sm-9">
           <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="webhook" />
@@ -103,13 +112,16 @@ foreach (object::all() as $object) {
       <div class="form-group">
        <label class="col-sm-3 control-label">{{Authentification token}}</label>
        <div class="col-sm-3">
-       <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="token" placeholder="{{Token}}"/>
-      </div>
-    </div>
-    <div class="form-group">
+         <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="token" placeholder="{{Token}}"/>
+       </div>
+     </div>
+     <div class="form-group">
       <label class="col-sm-3 control-label">{{URL de retour}}</label>
-      <div class="col-sm-9">
+      <div class="col-sm-9 callback external">
         <span><?php echo network::getNetworkAccess('external') . '/plugins/synologychat/core/php/jeeSynologychat.php?apikey=' . jeedom::getApiKey($plugin->getId()); ?></span>
+      </div>
+      <div class="col-sm-9 callback internal">
+        <span><?php echo network::getNetworkAccess('internal') . '/plugins/synologychat/core/php/jeeSynologychat.php?apikey=' . jeedom::getApiKey($plugin->getId()); ?></span>
       </div>
     </div>
   </fieldset>
