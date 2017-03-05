@@ -33,7 +33,7 @@ if (is_object($user)) {
 	$parameters['profile'] = init('username');
 }
 $cmd = $eqLogic->getCmd('action', 'send');
-if ('#' . init('channel_name') == $cmd->getConfiguration('destination') && $cmd->getCache('storeVariable', 'none') != 'none') {
+if ($cmd->getCache('storeVariable', 'none') != 'none') {
 	$dataStore = new dataStore();
 	$dataStore->setType('scenario');
 	$dataStore->setKey($cmd->getCache('storeVariable', 'none'));
