@@ -100,7 +100,7 @@ class synologychatCmd extends cmd {
 			}
 
 			foreach ($_options['files'] as $file) {
-				$post = array('text' => 'Send file', 'file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
+				$post = array('file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
 				$request_http->setPost('payload=' . json_encode($post));
 				$result = $request_http->exec(5, 3);
 				if (!is_json($result)) {
