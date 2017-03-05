@@ -34,13 +34,7 @@ if (is_object($user)) {
 }
 $cmd = $eqLogic->getCmd('action', 'send');
 if ($cmd->getCache('storeVariable', 'none') != 'none') {
-	$dataStore = new dataStore();
-	$dataStore->setType('scenario');
-	$dataStore->setKey($cmd->getCache('storeVariable', 'none'));
-	$dataStore->setValue(init('text'));
-	$dataStore->setLink_id(-1);
-	$dataStore->save();
-	$cmd->setCache('storeVariable', 'none');
+	$cmd->askResponse(init('text'));
 	echo json_encode(array('text' => ''));
 	die();
 }

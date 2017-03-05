@@ -86,10 +86,14 @@ class synologychatCmd extends cmd {
 		if ($this->getLogicalId() == 'send') {
 			$request_http = new com_http(trim($eqLogic->getConfiguration('webhook')));
 			if (isset($_options['answer'])) {
-				$_options['message'] .= ' (' . implode(';', $_options['answer']) . ')';
+				$_options['message'] .= ' ' . implode('|', $_options['answer']);
+				/*foreach ($_options['answer'] as $answer) {
+					$_options['message'] .= '<' . $this->generateAskResponseLink($answer) . '|' . $answer . '> ';
+				}*/
 			}
 			$post = array('text' => trim($_options['title'] . ' ' . $_options['message']));
-			$request_http->setPost('payload=' . json_encode($post));
+			$payload = str_replace('&', '%26', json_encode($post));
+			$request_http->setPost('payload=' . $payload);
 			$result = $request_http->exec(5, 3);
 			if (!is_json($result)) {
 				throw new Exception(__('Erreur : ', __FILE__) . $result);
@@ -101,7 +105,8 @@ class synologychatCmd extends cmd {
 
 			foreach ($_options['files'] as $file) {
 				$post = array('file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
-				$request_http->setPost('payload=' . json_encode($post));
+				$payload = str_replace('&', '%26', json_encode($post));
+				$request_http->setPost('payload=' . $payload);
 				$result = $request_http->exec(5, 3);
 				if (!is_json($result)) {
 					throw new Exception(__('Erreur : ', __FILE__) . $result);
