@@ -27,7 +27,7 @@ if (!is_object($eqLogic)) {
 	echo json_encode(array('text' => __('Token inconnu : ', __FILE__) . init('token')));
 	die();
 }
-$parameters = array();
+$parameters = array('plugin' => 'synologychat');
 $user = user::byLogin(init('username'));
 if (is_object($user)) {
 	$parameters['profile'] = init('username');
