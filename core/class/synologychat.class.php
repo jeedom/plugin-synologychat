@@ -86,10 +86,9 @@ class synologychatCmd extends cmd {
 		if ($this->getLogicalId() == 'send') {
 			$request_http = new com_http(trim($eqLogic->getConfiguration('webhook')));
 			if (isset($_options['answer'])) {
-				$_options['message'] .= ' ' . implode('|', $_options['answer']);
-				/*foreach ($_options['answer'] as $answer) {
-					$_options['message'] .= '<' . $this->generateAskResponseLink($answer) . '|' . $answer . '> ';
-				}*/
+				foreach ($_options['answer'] as $answer) {
+					$_options['message'] .= '<' . $this->generateAskResponseLink($answer) . '&count=4|' . $answer . '> ';
+				}
 			}
 			$post = array('text' => trim($_options['title'] . ' ' . $_options['message']));
 			$payload = str_replace('&', '%26', json_encode($post));
