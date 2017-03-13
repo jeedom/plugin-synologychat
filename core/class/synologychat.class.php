@@ -106,7 +106,7 @@ class synologychatCmd extends cmd {
 				$post = array('file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
 				$payload = str_replace('&', '%26', json_encode($post));
 				$request_http->setPost('payload=' . $payload);
-				$result = $request_http->exec(5, 3);
+				$result = $request_http->exec(15, 3);
 				if (!is_json($result)) {
 					throw new Exception(__('Erreur : ', __FILE__) . $result);
 				}

@@ -44,9 +44,6 @@ $cmd_text->event(trim(init('text')));
 $cmd_sender = $eqLogic->getCmd('info', 'sender');
 $cmd_sender->event(init('username'));
 $reply = interactQuery::tryToReply(trim(init('text')), $parameters);
-if (!is_array($reply)) {
-	$reply = array('reply' => $reply);
-}
 if (isset($reply['file']) && count($reply['file']) > 0) {
 	if (!is_array($reply['file'])) {
 		$reply['file'] = array($reply['file']);
