@@ -32,9 +32,8 @@ $user = user::byLogin(init('username'));
 if (is_object($user)) {
 	$parameters['profile'] = init('username');
 }
-$cmd = $eqLogic->getCmd('action', 'send');
-if ($cmd->getCache('storeVariable', 'none') != 'none') {
-	$cmd->askResponse(init('text'));
+if ($send->getCache('storeVariable', 'none') != 'none') {
+	$send->askResponse(init('text'));
 	echo json_encode(array('text' => ''));
 	die();
 }
@@ -48,7 +47,7 @@ if (isset($reply['file']) && count($reply['file']) > 0) {
 	if (!is_array($reply['file'])) {
 		$reply['file'] = array($reply['file']);
 	}
-	$send = $eqLogic->getCmd(null, 'send');
+$parameters['reply_cmd'] = $send;
 	$send->execCmd(array('files' => $reply['file'], 'message' => $reply['reply'], 'title' => ''));
 	die();
 }
