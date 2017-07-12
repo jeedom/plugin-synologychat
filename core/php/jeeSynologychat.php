@@ -32,6 +32,7 @@ $user = user::byLogin(init('username'));
 if (is_object($user)) {
 	$parameters['profile'] = init('username');
 }
+$send = $eqLogic->getCmd('action', 'send');
 if ($send->getCache('storeVariable', 'none') != 'none') {
 	$send->askResponse(init('text'));
 	echo json_encode(array('text' => ''));
@@ -42,12 +43,12 @@ $cmd_text = $eqLogic->getCmd('info', 'lastmessage');
 $cmd_text->event(trim(init('text')));
 $cmd_sender = $eqLogic->getCmd('info', 'sender');
 $cmd_sender->event(init('username'));
+$parameters['reply_cmd'] = $send;
 $reply = interactQuery::tryToReply(trim(init('text')), $parameters);
 if (isset($reply['file']) && count($reply['file']) > 0) {
 	if (!is_array($reply['file'])) {
 		$reply['file'] = array($reply['file']);
 	}
-$parameters['reply_cmd'] = $send;
 	$send->execCmd(array('files' => $reply['file'], 'message' => $reply['reply'], 'title' => ''));
 	die();
 }
