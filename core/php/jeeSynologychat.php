@@ -33,8 +33,7 @@ if (is_object($user)) {
 	$parameters['profile'] = init('username');
 }
 $send = $eqLogic->getCmd('action', 'send');
-if ($send->getCache('storeVariable', 'none') != 'none') {
-	$send->askResponse(init('text'));
+if ($send->askResponse(init('text'))) {
 	echo json_encode(array('text' => ''));
 	die();
 }
