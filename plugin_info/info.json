@@ -4,6 +4,8 @@
 	"description" : "Plugin pour integrer Jeedom au chat Synology",
 	"licence" : "AGPL",
 	"author" : "Loïc",
-	"require" : "2.3",
-	"category" : "communication"
+	"require" : "3.0",
+	"category" : "communication",
+	"changelog" : "https://github.com/jeedom/plugin-synologychat/blob/stable/doc/#language#/changelog.asciidoc",
+	"documentation" : "https://github.com/jeedom/plugin-synologychat/blob/stable/doc/#language#/index.asciidoc"
 }
