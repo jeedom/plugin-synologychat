@@ -102,7 +102,7 @@ class synologychatCmd extends cmd {
 					throw new Exception(__('Erreur : ', __FILE__) . $result);
 				}
 				$decode_result = json_decode($result, true);
-				if (isset($decode_result['code']) && $decode_result['code'] == 411) {
+				if (isset($decode_result['error']) && isset($decode_result['error']['code']) && $decode_result['error']['code'] == 411) {
 					sleep(1);
 					$retry = true;
 				} else if (!isset($decode_result['success']) || !$decode_result['success']) {
@@ -127,7 +127,7 @@ class synologychatCmd extends cmd {
 							throw new Exception(__('Erreur : ', __FILE__) . $result);
 						}
 						$decode_result = json_decode($result, true);
-						if (isset($decode_result['code']) && $decode_result['code'] == 411) {
+						if (isset($decode_result['error']) && isset($decode_result['error']['code']) && $decode_result['error']['code'] == 411) {
 							sleep(1);
 							$retry = true;
 						} else if (!isset($decode_result['success']) || !$decode_result['success']) {
