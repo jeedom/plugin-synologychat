@@ -91,7 +91,7 @@ class synologychatCmd extends cmd {
 				}
 			}
 			$post = array('text' => trim($_options['title'] . ' ' . $_options['message']));
-			$payload = str_replace('&', '%26', json_encode($post));
+			$payload = urlencode(json_encode($post));
 			$request_http->setPost('payload=' . $payload);
 			$retry = true;
 			$count = 0;
@@ -116,7 +116,7 @@ class synologychatCmd extends cmd {
 			if (isset($_options['files']) && count($_options['files']) > 0) {
 				foreach ($_options['files'] as $file) {
 					$post = array('file_url' => network::getNetworkAccess($eqLogic->getConfiguration('networkmode')) . '/plugins/synologychat/core/php/jeeFile.php?apikey=' . jeedom::getApiKey('synologychat') . '&file=' . urlencode($file));
-					$payload = str_replace('&', '%26', json_encode($post));
+					$payload = urlencode(json_encode($post));
 					$request_http->setPost('payload=' . $payload);
 					$retry = true;
 					$count = 0;

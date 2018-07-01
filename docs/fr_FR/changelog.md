@@ -1,2 +1,4 @@
-Changelog détaillé :
-<https://github.com/jeedom/plugin-synologychat/commits/stable>
+# 18/05/2018
+
+- Correction de bugs
+- Passage sur le nouveau système de documentation
