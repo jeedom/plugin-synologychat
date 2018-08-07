@@ -90,7 +90,12 @@ class synologychatCmd extends cmd {
 					$_options['message'] .= '<' . $this->generateAskResponseLink($answer) . '&count=4|' . $answer . '> ';
 				}
 			}
-			$post = array('text' => trim($_options['title'] . ' ' . $_options['message']));
+			if ($_options['title'] === $_options['message']) {
+                                $post = array('text' => html_entity_decode(trim($_options['message']), ENT_QUOTES | ENT_HTML5));
+                        }
+                        else {
+                                $post = array('text' => html_entity_decode(trim("{$_options['title']} {$_options['message']}"), ENT_QUOTES | ENT_HTML5));
+                        }
 			$payload = urlencode(json_encode($post));
 			$request_http->setPost('payload=' . $payload);
 			$retry = true;
